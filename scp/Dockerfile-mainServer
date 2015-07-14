@@ -1,0 +1,16 @@
+FROM ubuntu:14.04.2
+MAINTAINER SungKwang Song <saltfactory@gmail.com>
+
+RUN cd /etc/apt && \
+     sed -i 's/archive.ubuntu.com/ftp.daum.net/g' sources.list
+
+RUN apt-get update
+RUN apt-get install -y ssh-client tree
+
+RUN useradd -ms /bin/bash mainuser
+RUN echo 'mainuser:mainuser' | chpasswd
+
+RUN mkdir /home/mainuser/data
+RUN echo "test mainserver data backup" > /home/mainuser/data/seed.data
+
+WORKDIR /home/mainuser

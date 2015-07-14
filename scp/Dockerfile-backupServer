@@ -1,0 +1,18 @@
+FROM ubuntu:14.04.2
+MAINTAINER SungKwang Song <saltfactory@gmail.com>
+
+RUN cd /etc/apt && \
+     sed -i 's/archive.ubuntu.com/ftp.daum.net/g' sources.list
+
+RUN apt-get update
+RUN apt-get install -y openssh-server tree
+RUN mkdir /var/run/sshd
+
+RUN useradd -ms /bin/bash backupuser
+RUN echo 'backupuser:backupuser' | chpasswd
+RUN mkdir /home/backupuser/backup
+RUN chown backupuser:backupuser /home/backupuser/backup
+#WORKDIR /home/backupuser
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
