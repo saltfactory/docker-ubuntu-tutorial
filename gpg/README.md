@@ -4,7 +4,9 @@ Docker에서 **GnuPG** 키를 생성하지 못하는 문제를 해결하고 파�
 
 ## 실행
 
+```
 sh demoServier.sh build && sh demoServer.sh start
+```
 
 ## 테스트 방법
 
